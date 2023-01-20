@@ -1,7 +1,5 @@
-#graph {
+.graph-container {
   display: grid;
-  width: auto;
-  height: auto;
-  text-align: center;
-  align-items: center;
+  height: 100%;
+  width: 100%;
 }
