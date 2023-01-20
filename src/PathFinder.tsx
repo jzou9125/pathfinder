@@ -1,10 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import "./PathFinder.css";
+import Node from "./Node/Node.js";
+
+interface NodeProps {
+  row: number;
+  column: number;
+  isStart: boolean;
+  isFinish: boolean;
+  isVisited: boolean;
+  isWall: boolean;
+}
 
 function PathFinder() {
   const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState(0);
-  const [grid, setGrid] = useState<Object[]>([]);
+  const [grid, setGrid] = useState<NodeProps[][]>([]);
   const [rows, setRows] = useState(0);
   const [columns, setColumns] = useState(0);
   const square_size = 32;
@@ -35,7 +45,6 @@ function PathFinder() {
         newGrid[row][column] = nodeProps(row, column);
       }
     }
-    console.log(newGrid);
     return newGrid;
   };
 
@@ -52,8 +61,17 @@ function PathFinder() {
 
   return (
     <div className="graph-container" ref={ref}>
-      {" "}
-      yes
+      {grid.map((row, x) =>
+        row.map((node, y) => (
+          <Node
+            key={`${x}-${y}`}
+            // isStart={node.row === start[0] && node.column === start[1]}
+            // isFinish={node.row === target[0] && node.column === target[1]}
+            isVisited={node.isVisited}
+            isWall={node.isWall}
+          />
+        ))
+      )}
     </div>
   );
 }

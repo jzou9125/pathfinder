@@ -1,0 +1,15 @@
+.node {
+  outline: 0.5px solid;
+}
+
+.node-start {
+  background-color: green;
+}
+
+.node-finish {
+  background-color: red;
+}
+
+.visited {
+  background-color: blue;
+}
