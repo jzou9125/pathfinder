@@ -4,7 +4,7 @@ type NodeProps = {
   row?: number;
   column?: number;
   isStart?: boolean;
-  isFinish?: boolean;
+  isTarget?: boolean;
   isVisited?: boolean;
   isWall?: boolean;
 };
@@ -13,13 +13,13 @@ const Node = ({
   row,
   column,
   isStart,
-  isFinish,
+  isTarget: isTarget,
   isVisited,
   isWall,
 }: NodeProps) => {
   const extraClassName = isStart
     ? "node-start"
-    : isFinish
+    : isTarget
     ? "node-finish"
     : isWall
     ? "wall"

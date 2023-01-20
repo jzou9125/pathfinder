@@ -6,7 +6,7 @@ interface NodeProps {
   row: number;
   column: number;
   isStart: boolean;
-  isFinish: boolean;
+  isTarget: boolean;
   isVisited: boolean;
   isWall: boolean;
   previousNode: null;
@@ -17,11 +17,18 @@ function PathFinder() {
   const [grid, setGrid] = useState<NodeProps[][]>([]);
   const [rows, setRows] = useState(0);
   const [columns, setColumns] = useState(0);
+  const [start, setStart] = useState([0, 0]);
+  const [target, setTarget] = useState([0, 0]);
+
   const square_size = 32;
 
   useEffect(() => {
-    console.log(columns, columns.toString());
     setGrid(initGrid(rows, columns));
+  }, [start, target]);
+
+  useEffect(() => {
+    setStart([Math.floor(rows / 3), Math.floor(columns / 3)]);
+    setTarget([Math.floor(rows / 3), Math.floor((columns / 3) * 2)]);
   }, [rows, columns]);
 
   useEffect(() => {
@@ -47,14 +54,14 @@ function PathFinder() {
 
   const nodeProps = (row: number, column: number) => {
     return {
-      row,
-      column,
+      row: row,
+      column: column,
       distance: Infinity,
       isVisited: false,
       isWall: false,
       previousNode: null,
-      isStart: false,
-      isFinish: false,
+      isStart: row === start[0] && column === start[1],
+      isTarget: row === target[0] && column === target[1],
     };
   };
 
@@ -64,8 +71,8 @@ function PathFinder() {
         row.map((node, y) => (
           <Node
             key={`${x}-${y}`}
-            // isStart={node.row === start[0] && node.column === start[1]}
-            // isFinish={node.row === target[0] && node.column === target[1]}
+            isStart={node.isStart}
+            isTarget={node.isTarget}
             isVisited={node.isVisited}
             isWall={node.isWall}
           />
