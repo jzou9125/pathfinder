@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -18,6 +24,6 @@
 body {
   display: grid;
   height: 100vh;
-  width: 100vw;
-  grid-template-rows: 1fr 8fr;
+  width: 100%;
+  grid-template-rows: 2fr 8fr;
 }
