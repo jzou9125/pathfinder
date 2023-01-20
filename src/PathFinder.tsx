@@ -13,13 +13,13 @@ interface NodeProps {
 
 function PathFinder() {
   const ref = useRef<HTMLDivElement>(null);
-  const [count, setCount] = useState(0);
   const [grid, setGrid] = useState<NodeProps[][]>([]);
   const [rows, setRows] = useState(0);
   const [columns, setColumns] = useState(0);
   const square_size = 32;
 
   useEffect(() => {
+    console.log(columns, columns.toString());
     setGrid(initGrid(rows, columns));
   }, [rows, columns]);
 
@@ -39,12 +39,10 @@ function PathFinder() {
   }, []);
 
   const initGrid = (rows: number, columns: number) => {
-    let newGrid = Array.from({ length: rows }, () => Array(columns).fill(null));
-    for (let row = 0; row < rows; row++) {
-      for (let column = 0; column < columns; column++) {
-        newGrid[row][column] = nodeProps(row, column);
-      }
-    }
+    let newGrid = Array.from({ length: rows }, (_, row) =>
+      Array.from({ length: columns }, (_, column) => nodeProps(row, column))
+    );
+
     return newGrid;
   };
 
