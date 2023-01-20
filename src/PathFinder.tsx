@@ -9,6 +9,7 @@ interface NodeProps {
   isFinish: boolean;
   isVisited: boolean;
   isWall: boolean;
+  previousNode: null;
 }
 
 function PathFinder() {
@@ -39,11 +40,9 @@ function PathFinder() {
   }, []);
 
   const initGrid = (rows: number, columns: number) => {
-    let newGrid = Array.from({ length: rows }, (_, row) =>
+    return Array.from({ length: rows }, (_, row) =>
       Array.from({ length: columns }, (_, column) => nodeProps(row, column))
     );
-
-    return newGrid;
   };
 
   const nodeProps = (row: number, column: number) => {
@@ -54,6 +53,8 @@ function PathFinder() {
       isVisited: false,
       isWall: false,
       previousNode: null,
+      isStart: false,
+      isFinish: false,
     };
   };
 
