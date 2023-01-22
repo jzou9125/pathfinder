@@ -50,7 +50,6 @@ function PathFinder() {
   }, [start, target]);
 
   useEffect(() => {
-    anime.set(".visited", { backgroundColor: "transparent" });
     setStart([Math.floor(rows / 3), Math.floor(columns / 3)]);
     setTarget([Math.floor(rows / 3), Math.floor((columns / 3) * 2)]);
   }, [rows, columns]);
@@ -58,6 +57,10 @@ function PathFinder() {
   useEffect(() => {
     const resizeListener = () => {
       if (ref.current !== null) {
+        anime.set(".visited", { backgroundColor: "transparent" });
+        document.querySelectorAll("*").forEach((e) => {
+          e.classList.remove("visited");
+        });
         setRows(Math.floor(ref.current.clientHeight / square_size));
         setColumns(Math.floor(ref.current.clientWidth / square_size));
       }
@@ -94,9 +97,9 @@ function PathFinder() {
       <div id="container">
         <nav>
           <button onClick={() => DFS({ grid, setGrid, start, target })}>
-            {" "}
             DFS
           </button>
+          <button> BFS </button>
         </nav>
         <div className="graph-container" ref={ref}>
           {grid.map((row, x) =>

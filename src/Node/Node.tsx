@@ -26,6 +26,6 @@ const Node = ({
     : isVisited
     ? "visited"
     : "";
-  return <div className={`node ${extraClassName}`}> </div>;
+  return <div className={`node ${extraClassName}`}></div>;
 };
 export default Node;
