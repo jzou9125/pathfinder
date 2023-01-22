@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./PathFinder.css";
 import Node from "./Node/Node.js";
+import DFS from "./Algorithmns/DFS.js";
 
 interface NodeProps {
   row: number;
@@ -66,19 +67,26 @@ function PathFinder() {
   };
 
   return (
-    <div className="graph-container" ref={ref}>
-      {grid.map((row, x) =>
-        row.map((node, y) => (
-          <Node
-            key={`${x}-${y}`}
-            isStart={node.isStart}
-            isTarget={node.isTarget}
-            isVisited={node.isVisited}
-            isWall={node.isWall}
-          />
-        ))
-      )}
-    </div>
+    <>
+      <div id="container">
+        <nav>
+          <button onClick={() => DFS({ grid })}> DFS</button>
+        </nav>
+        <div className="graph-container" ref={ref}>
+          {grid.map((row, x) =>
+            row.map((node, y) => (
+              <Node
+                key={`${x}-${y}`}
+                isStart={node.isStart}
+                isTarget={node.isTarget}
+                isVisited={node.isVisited}
+                isWall={node.isWall}
+              />
+            ))
+          )}
+        </div>
+      </div>
+    </>
   );
 }
 
