@@ -31,11 +31,11 @@ function PathFinder() {
       targets: ".visited",
       backgroundColor: "rgb(0, 0, 255)",
       scale: [
-        { value: 0.1, easing: "easeOutSine", duration: 500 },
-        { value: 1, easing: "easeInOutQuad", duration: 1200 },
+        { value: 0.1, easing: "linear", duration: 150 },
+        { value: 1, easing: "linear", duration: 200 },
       ],
       delay: anime.stagger(50, {
-        grid: [grid.length, grid[0].length],
+        grid: [grid[0].length, grid.length],
         from: "first",
       }),
     });
