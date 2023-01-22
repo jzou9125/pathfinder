@@ -20,7 +20,6 @@ function PathFinder() {
   const [columns, setColumns] = useState(0);
   const [start, setStart] = useState([0, 0]);
   const [target, setTarget] = useState([0, 0]);
-
   const square_size = 32;
 
   useEffect(() => {
@@ -70,7 +69,7 @@ function PathFinder() {
     <>
       <div id="container">
         <nav>
-          <button onClick={() => DFS({ grid })}> DFS</button>
+          <button onClick={() => DFS({ grid, setGrid, start, target })}> DFS</button>
         </nav>
         <div className="graph-container" ref={ref}>
           {grid.map((row, x) =>
