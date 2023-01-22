@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./PathFinder.css";
 import Node from "./Node/Node.js";
 import DFS from "./Algorithmns/DFS.js";
+import anime from "animejs/lib/anime.es.js";
 
 interface NodeProps {
   row: number;
@@ -21,6 +22,24 @@ function PathFinder() {
   const [start, setStart] = useState([0, 0]);
   const [target, setTarget] = useState([0, 0]);
   const square_size = 32;
+
+  useEffect(() => {
+    if (grid.length === 0) {
+      return;
+    }
+    anime({
+      targets: ".visited",
+      backgroundColor: "rgb(0, 0, 255)",
+      scale: [
+        { value: 0.1, easing: "easeOutSine", duration: 500 },
+        { value: 1, easing: "easeInOutQuad", duration: 1200 },
+      ],
+      delay: anime.stagger(50, {
+        grid: [grid.length, grid[0].length],
+        from: "first",
+      }),
+    });
+  }, [grid]);
 
   useEffect(() => {
     setGrid(initGrid(rows, columns));
@@ -69,7 +88,10 @@ function PathFinder() {
     <>
       <div id="container">
         <nav>
-          <button onClick={() => DFS({ grid, setGrid, start, target })}> DFS</button>
+          <button onClick={() => DFS({ grid, setGrid, start, target })}>
+            {" "}
+            DFS
+          </button>
         </nav>
         <div className="graph-container" ref={ref}>
           {grid.map((row, x) =>
