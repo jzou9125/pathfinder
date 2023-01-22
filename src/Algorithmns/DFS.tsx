@@ -24,6 +24,9 @@ type algorithmProps = {
 };
 
 function DFS({ grid, setGrid, start, target }: algorithmProps) {
+  if (grid[target[0]][target[1]].isVisited) {
+    return null;
+  }
   let newGrid = [...grid];
   recursion(newGrid, start, target);
   setGrid(newGrid);
@@ -31,7 +34,7 @@ function DFS({ grid, setGrid, start, target }: algorithmProps) {
 
 function recursion(grid: NodeProps[][], start: number[], target: number[]) {
   grid[start[0]][start[1]].isVisited = true;
-
+  console.log(start);
   if (start[0] === target[0] && start[1] === target[1]) {
     return true;
   }
@@ -49,7 +52,9 @@ function getNeighbors(grid: NodeProps[][], row: number, column: number) {
     let newRow = row + direction[0];
     let newColumn = column + direction[1];
     if (
+      0 <= newRow &&
       newRow < grid.length &&
+      0 <= newColumn &&
       newColumn < grid[0].length &&
       !grid[newRow][newColumn].isVisited &&
       !grid[newRow][newColumn].isWall
@@ -58,8 +63,8 @@ function getNeighbors(grid: NodeProps[][], row: number, column: number) {
         neighbors.push([newRow, newColumn]);
       }
     }
-    return neighbors;
   }
+  return neighbors;
 }
 
 export default DFS;
