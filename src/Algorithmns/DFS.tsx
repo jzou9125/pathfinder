@@ -34,7 +34,6 @@ function DFS({ grid, setGrid, start, target }: algorithmProps) {
 
 function recursion(grid: NodeProps[][], start: number[], target: number[]) {
   grid[start[0]][start[1]].isVisited = true;
-  console.log(start);
   if (start[0] === target[0] && start[1] === target[1]) {
     return true;
   }

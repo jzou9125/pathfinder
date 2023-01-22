@@ -21,31 +21,36 @@ function PathFinder() {
   const [columns, setColumns] = useState(0);
   const [start, setStart] = useState([0, 0]);
   const [target, setTarget] = useState([0, 0]);
+  const [pathAnimation, setPathAnimation] = useState<anime.AnimeParams>({
+    animation: null,
+  });
   const square_size = 32;
 
   useEffect(() => {
-    if (grid.length === 0) {
-      return;
+    if (grid.length !== 0) {
+      let animation = anime({
+        targets: ".visited",
+        backgroundColor: "rgb(0, 0, 255)",
+        scale: [
+          { value: 0.1, easing: "linear", duration: 150 },
+          { value: 1, easing: "linear", duration: 200 },
+        ],
+        delay: anime.stagger(50, {
+          grid: [grid[0].length, grid.length],
+          from: "first",
+        }),
+      });
+      animation.play();
+      setPathAnimation(animation);
     }
-    anime({
-      targets: ".visited",
-      backgroundColor: "rgb(0, 0, 255)",
-      scale: [
-        { value: 0.1, easing: "linear", duration: 150 },
-        { value: 1, easing: "linear", duration: 200 },
-      ],
-      delay: anime.stagger(50, {
-        grid: [grid[0].length, grid.length],
-        from: "first",
-      }),
-    });
   }, [grid]);
 
   useEffect(() => {
-    setGrid(initGrid(rows, columns));
+    setGrid([...initGrid(rows, columns)]);
   }, [start, target]);
 
   useEffect(() => {
+    anime.set(".visited", { backgroundColor: "transparent" });
     setStart([Math.floor(rows / 3), Math.floor(columns / 3)]);
     setTarget([Math.floor(rows / 3), Math.floor((columns / 3) * 2)]);
   }, [rows, columns]);
