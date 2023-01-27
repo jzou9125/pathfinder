@@ -3,6 +3,7 @@ import "./PathFinder.css";
 import Node from "./Node/Node.js";
 import DFS from "./Algorithmns/DFS.js";
 import anime from "animejs/lib/anime.es.js";
+import BFS from "./Algorithmns/BFS";
 
 interface NodeProps {
   row: number;
@@ -99,7 +100,9 @@ function PathFinder() {
           <button onClick={() => DFS({ grid, setGrid, start, target })}>
             DFS
           </button>
-          <button> BFS </button>
+          <button onClick={() => BFS({ grid, setGrid, start, target })}>
+            BFS
+          </button>
         </nav>
         <div className="graph-container" ref={ref}>
           {grid.map((row, x) =>
